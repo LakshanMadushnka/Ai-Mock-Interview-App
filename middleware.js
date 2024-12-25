@@ -1,19 +1,10 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)']);
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)'])
 
 export default clerkMiddleware(async (auth, req) => {
-    // Restrict admin routes to users with specific permissions
-    if (isProtectedRoute(req)) {
-      await auth.protect((has) => {
-        return (
-          has({ permission: 'org:sys_memberships:manage' }) ||
-          has({ permission: 'org:sys_domains_manage' })
-        )
-      })
-    }
-  })
+  if (isProtectedRoute(req)) await auth.protect()
+})
 
 export const config = {
   matcher: [
@@ -22,4 +13,4 @@ export const config = {
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
-};
+}

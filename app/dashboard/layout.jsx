@@ -8,4 +8,4 @@ function DashboardLayout({children}) {
   )
 }
 
-export default DashboaLayoutrd
+export default DashboardLayout
