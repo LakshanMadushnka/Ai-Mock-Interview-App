@@ -11,6 +11,4 @@ export const MockInverview = pgTable('mockInterview', {
     mockId: varchar('mockId').notNull()
 
 
-
-
     });
